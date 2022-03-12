@@ -51,8 +51,8 @@ open class CardTemplatePreviewer : AbstractFlashcardViewer() {
      * A single template was selected, and there was an associated card which exists
      */
     @KotlinCleanup("make lateinit")
-    private var mCardList: LongArray? = null
-    private var mNoteEditorBundle: Bundle? = null
+    private lateinit var mCardList: LongArray
+    private lateinit var mNoteEditorBundle: Bundle
     private var mShowingAnswer = false
 
     /**
@@ -79,9 +79,9 @@ open class CardTemplatePreviewer : AbstractFlashcardViewer() {
             parameters = intent.extras
         }
         if (parameters != null) {
-            mNoteEditorBundle = parameters.getBundle("noteEditorBundle")
+            mNoteEditorBundle = parameters.getBundle("noteEditorBundle")!!
             mEditedModelFileName = parameters.getString(TemporaryModel.INTENT_MODEL_FILENAME)
-            mCardList = parameters.getLongArray("cardList")
+            mCardList = parameters.getLongArray("cardList")!!
             mOrdinal = parameters.getInt("ordinal")
             mCardListIndex = parameters.getInt("cardListIndex")
             mShowingAnswer = parameters.getBoolean("showingAnswer", mShowingAnswer)
